@@ -41,7 +41,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Twitter Monitor", lifespan=lifespan)
 app.include_router(routes.router)
-app.mount("/archive", StaticFiles(directory=os.environ.get("ARCHIVE_DIR", "/app/data/archive")), name="archive")
+
+# Ensure the archive directory exists before Starlette mounts it (the data
+# volume shadows whatever the Dockerfile created, so we create it at import).
+_archive_dir = os.environ.get("ARCHIVE_DIR", "/app/data/archive")
+os.makedirs(_archive_dir, exist_ok=True)
+app.mount("/archive", StaticFiles(directory=_archive_dir), name="archive")
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
