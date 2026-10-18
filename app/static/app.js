@@ -16,6 +16,7 @@ async function refresh() {
 
   try {
     const data = await (await fetch("/api/uploads?limit=200")).json();
+    populateFilter(data.watches);
     renderCounts(data.counts, data.watches);
     renderGallery(data.uploads, $("username-filter").value);
   } catch (e) { /* ignore */ }
