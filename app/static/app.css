@@ -48,7 +48,18 @@ button:hover { filter: brightness(1.15); }
 .card h2 { margin: 0 0 10px; font-size: 15px; }
 .runs { white-space: pre-wrap; font-size: 12px; color: #9aa3b2; max-height: 200px; overflow: auto; }
 #counts-list { margin: 0; padding-left: 18px; }
-#counts-list li { margin-bottom: 4px; }
+#counts-list li { margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.button.rm,
+button.rm {
+  padding: 0 7px;
+  line-height: 20px;
+  background: #3a1d1d;
+  border: 1px solid #6b3030;
+  color: #f0a0a0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button.rm:hover { background: #5a2626; filter: none; }
 .gallery-card { margin: 0 20px 20px; }
 .gallery-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 select {

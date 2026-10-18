@@ -26,9 +26,22 @@ function renderCounts(counts, watches) {
   const list = $("counts-list");
   if (!watches.length) { list.innerHTML = "<li>No watched accounts</li>"; return; }
   list.innerHTML = watches
-    .map((u) => `<li>@${u}: <strong>${counts[u] || 0}</strong></li>`)
+    .map((u) => `<li><span>@${u}: <strong>${counts[u] || 0}</strong></span>` +
+       `<button class="rm" data-user="${u}" title="Stop watching @${u}">×</button></li>`)
     .join("");
 }
+
+async function removeWatch(user) {
+  if (!confirm(`Remove @${user} from the watch list?`)) return;
+  await fetch(`/api/watch/${encodeURIComponent(user)}`, { method: "DELETE" });
+  refresh();
+}
+
+// Delegated handler for the per-account remove buttons.
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".rm");
+  if (btn) removeWatch(btn.dataset.user);
+});
 
 function renderGallery(uploads, username) {
   const gallery = $("gallery");
