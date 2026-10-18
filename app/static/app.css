@@ -1,0 +1,86 @@
+* { box-sizing: border-box; }
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background: #0f1115;
+  color: #e6e8ec;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: #171a21;
+  border-bottom: 1px solid #2a2f3a;
+  flex-wrap: wrap;
+}
+h1 { font-size: 20px; margin: 0; margin-right: auto; }
+.actions { display: flex; gap: 8px; }
+input {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #2a2f3a;
+  background: #0f1115;
+  color: #e6e8ec;
+}
+button {
+  padding: 7px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2f3a;
+  color: #e6e8ec;
+  cursor: pointer;
+}
+button.primary { background: #3b82f6; }
+button:hover { filter: brightness(1.15); }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+  padding: 16px 20px;
+}
+.card {
+  background: #171a21;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.card h2 { margin: 0 0 10px; font-size: 15px; }
+.runs { white-space: pre-wrap; font-size: 12px; color: #9aa3b2; max-height: 200px; overflow: auto; }
+#counts-list { margin: 0; padding-left: 18px; }
+#counts-list li { margin-bottom: 4px; }
+.gallery-card { margin: 0 20px 20px; }
+.gallery-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #2a2f3a;
+  background: #0f1115;
+  color: #e6e8ec;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.figure { position: relative; }
+.figure img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #2a2f3a;
+  display: block;
+}
+.figure figcaption {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0,0,0,.55);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+}
+.empty { color: #9aa3b2; padding: 20px; text-align: center; }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Twitter Monitor</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+  <header>
+    <h1>Twitter Monitor</h1>
+    <div class="actions">
+      <input id="watch-input" placeholder="Add username…" />
+      <button id="watch-add">Watch</button>
+      <button id="poll-now" class="primary">Poll now</button>
+    </div>
+  </header>
+
+  <section class="cards">
+    <div class="card status-card">
+      <h2>Status</h2>
+      <div id="status-summary">loading…</div>
+      <pre id="last-runs" class="runs"></pre>
+    </div>
+    <div class="card counts-card">
+      <h2>Uploads / account</h2>
+      <ul id="counts-list"></ul>
+    </div>
+  </section>
+
+  <section class="card gallery-card">
+    <div class="gallery-head">
+      <h2>Downloaded images</h2>
+      <select id="username-filter"><option value="">All accounts</option></select>
+    </div>
+    <div id="gallery" class="gallery"></div>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Twitter Monitor — native Docker Compose (no Portainer)
+# Runtime data lives under /docker/twitter-monitor/data on the host.
+# Image is pulled from GHCR (built by GitHub Actions on push to main).
+
+services:
+  twitter-monitor:
+    image: ghcr.io/onlinefabster/twitter-monitor:latest
+    container_name: twitter-monitor
+    restart: unless-stopped
+    volumes:
+      - /docker/twitter-monitor/data:/app/data
+    environment:
+      DB_PATH: /app/data/twitter-monitor.db
+      ARCHIVE_DIR: /app/data/archive
+      # Shared Twitter scraper service (webscraper)
+      TWITTER_SCRAPER_BASE_URL: ${TWITTER_SCRAPER_BASE_URL:-http://ser:18023}
+      # Immich (replace the dummy values)
+      IMMICH_BASE_URL: ${IMMICH_BASE_URL:-http://immich:2283}
+      IMMICH_API_KEY: ${IMMICH_API_KEY}
+      # Monitor schedule (cron), caps, archive root
+      MONITOR_CRON: ${MONITOR_CRON:-*/30 * * * *}
+      TWITTER_MAX_PER_ACCOUNT: ${TWITTER_MAX_PER_ACCOUNT:-10}
+      TWITTER_IMAGE_FETCH_TIMEOUT: ${TWITTER_IMAGE_FETCH_TIMEOUT:-30}
+      TZ: ${TZ:-Europe/Amsterdam}
+    ports:
+      - "127.0.0.1:18055:8081"
