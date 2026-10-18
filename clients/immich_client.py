@@ -80,10 +80,12 @@ class ImmichClient:
             files = {
                 "assetData": (filename, payload, "image/jpeg"),
             }
+            now = datetime.now(timezone.utc).isoformat()
             data = {
                 "deviceAssetId": signature,            # stable dedup key
                 "deviceId": _DEVICE_ID,
-                "fileCreatedAt": datetime.now(timezone.utc).isoformat(),
+                "fileCreatedAt": now,                  # Immich v3 requires both timestamps
+                "fileModifiedAt": now,
                 "albumId": album_id,
             }
             resp = await client.post(
