@@ -23,4 +23,4 @@ services:
       TWITTER_IMAGE_FETCH_TIMEOUT: ${TWITTER_IMAGE_FETCH_TIMEOUT:-30}
       TZ: ${TZ:-Europe/Amsterdam}
     ports:
-      - "127.0.0.1:18055:8081"
+      - "0.0.0.0:18055:8081"

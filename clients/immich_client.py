@@ -97,6 +97,22 @@ class ImmichClient:
             resp.raise_for_status()
             asset_id = resp.json().get("id")
 
+            # Immich v3 no longer associates the asset via albumId on upload;
+            # adding it to the album is a separate call (needs albumAsset.create).
+            assign = await client.put(
+                f"{self.base_url}/api/albums/{album_id}/assets",
+                headers=self._headers(),
+                json={"ids": [asset_id]},
+            )
+            if assign.status_code >= 400:
+                # Do not treat this upload as done — the image would be orphaned
+                # in the library instead of in twitter/{username}.
+                raise httpx.HTTPStatusError(
+                    f"album-assign failed {assign.status_code}: {assign.text[:200]}",
+                    request=assign.request,
+                    response=assign,
+                )
+
             # Tag the username on the photo (asset description).
             patch = await client.patch(
                 f"{self.base_url}/api/assets/{asset_id}",
